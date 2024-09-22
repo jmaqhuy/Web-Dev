@@ -4,8 +4,8 @@
     <meta charset="UTF-8"  />
     <title>Practice 1 - Task 11</title>
     <style>
-        body, div {
-            margin: 20px;
+        div {
+            margin: 10px;
         }
         .banner, .copyright {
             background-color: #5b9bd5;
@@ -14,20 +14,123 @@
             color: white;
             font-size: 20px;
         }
+        .banner {
+           height: 15%; 
+        }
+        .show {
+            display: flex;
+        }
+
+        .categories {
+            height: 60vh;
+            width: 10%;
+            background-color: #5b9bd5;
+            display: flex;
+            flex-direction: column;
+            
+        }
+        
+        .copyright {
+            height: 5%;
+        }
+        .categories button {
+            background-color: aquamarine;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        #thumbnail {
+            height: 60vh;
+            width: 90%;
+            background-color: #5b9bd5;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            padding: 10px;
+            justify-items: center; 
+            align-items: start;
+        }
+
+        #thumbnail img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+
     </style>
 </head>
 <body>
     <div class="banner">
         <p>Banner</p>
     </div>
-    <div class="show">
-        <div class="categories">
-            
+    <div class="show" style="margin: 0;">
+        <div class="categories" >
+            <button id="Category1">Category 1</button>
+            <button id="Category2">Category 2</button>
+            <button id="Category3">Category 3</button>
+            <button id="About">About</button>
         </div>
-        <div class="thumbnail"></div>
+        <div id="thumbnail">
+            <a href="images/img1.jpg"><img src="images/img1.jpg" alt=""></a>
+            <a href="images/img2.jpg"><img src="images/img2.jpg" alt=""></a>
+            <a href="images/img3.jpg"><img src="images/img3.jpg" alt=""></a>
+        </div>
     </div>
     <div class="copyright">
         <p>Copyright</p>
     </div>
 </body>
+
+<script>
+    const thumbnailDiv = document.getElementById("thumbnail");
+
+    const categoryImages = {
+            "Category1": [
+                {href: "images/img1.jpg", src: "images/img1.jpg"},
+                {href: "images/img2.jpg", src: "images/img2.jpg"},
+                {href: "images/img3.jpg", src: "images/img3.jpg"}
+            ],
+            "Category2": [
+                {href: "images/img4.jpg", src: "images/img4.jpg"},
+                {href: "images/img5.jpg", src: "images/img5.jpg"},
+                {href: "images/img6.jpg", src: "images/img6.jpg"}
+            ],
+            "Category3": [
+                {href: "images/img7.jpg", src: "images/img7.jpg"},
+                {href: "images/img8.jpg", src: "images/img8.jpg"},
+                {href: "images/img9.jpg", src: "images/img9.jpg"}
+            ]
+        };
+
+        // Function to update the thumbnail content
+        function updateThumbnails(category) {
+            thumbnailDiv.innerHTML = ''; // Clear existing thumbnails
+            categoryImages[category].forEach(image => {
+                const aTag = document.createElement('a');
+                aTag.href = image.href;
+                const imgTag = document.createElement('img');
+                imgTag.src = image.src;
+                aTag.appendChild(imgTag);
+                thumbnailDiv.appendChild(aTag);
+            });
+        }
+
+        // Add event listeners to buttons
+        document.getElementById("Category1").addEventListener("click", function() {
+            updateThumbnails("Category1");
+        });
+
+        document.getElementById("Category2").addEventListener("click", function() {
+            updateThumbnails("Category2");
+        });
+
+        document.getElementById("Category3").addEventListener("click", function() {
+            updateThumbnails("Category3");
+        });
+
+        document.getElementById("About").addEventListener("click", function() {
+            thumbnailDiv.textContent = "Nguyen Quoc Huy - BA12-089";
+        });
+</script>
 </html>
